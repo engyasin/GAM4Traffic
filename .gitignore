@@ -1,0 +1,3 @@
+*.npy
+gam_all*
+__pycache__/
