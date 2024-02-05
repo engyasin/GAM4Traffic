@@ -1,50 +1,5 @@
 
-from configuration import config
-import torch
 import numpy as np
-
-device = ['cpu','cuda'][torch.cuda.is_available()]
-
-x_ranges = torch.Tensor([range(config.action_size[0][0],config.action_size[0][1])]*
-                    (config.action_size[1][1]-config.action_size[1][0])).to(device).unsqueeze(-1)
-y_ranges = torch.Tensor([range(config.action_size[1][0],config.action_size[1][1])]*
-                    (config.action_size[0][1]-config.action_size[0][0])).T.to(device).unsqueeze(-1)
-
-def make_label(acts,stdxy):
-
-    # vxx in range(1,13)
-    # std
-    batch = acts.shape[0]
-    xs_ = x_ranges.repeat(1,1,batch)
-    ys_ = y_ranges.repeat(1,1,batch)
-
-    vxx = stdxy[:,0]/5
-    vyy = stdxy[:,1]/5
-
-
-    mu = acts.int().clone()#torch.clip(acts,min=0,max=120).int()
-    #mu += torch.Tensor([config.action_size[0][0],config.action_size[1][0]]).int().to(device)
-
-
-    gauss_x = torch.exp(-(xs_-mu[:,0])**2/(2*vxx**2))/(vxx * np.sqrt(2 * np.pi))
-    gauss_y = torch.exp(-(ys_-mu[:,1])**2/(2*vyy**2))/(vyy * np.sqrt(2 * np.pi))
-
-    label = (gauss_x*gauss_y).permute(2,1,0)# batch,120,120
-
-    # add some small random noise
-    label += (torch.rand_like(label)/(1e6)).to(device)
-    #label += (np.random.rand(*label.shape)/100)
-    label /= label.amax(dim=(1,2)).unsqueeze(1).unsqueeze(1)
-    #breakpoint()
-    return label
-
-
-def FDE():
-    pass
-
-def AFDE():
-    pass
-
 
 def get_agent_num(all_agents):
 
@@ -142,15 +97,6 @@ def bbox_to_cnt_wh(bbox,scale=1,origin=(0,0)):
     return cnt,w,h
 
 
-#  train_sample['label'].max(dim=2)[0].max(dim=2)[1] # batch,1 # y=raws
-#  train_sample['label'].max(dim=3)[0].max(dim=2)[1]
-
-def from_2d_2_xy(label):
-
-    ys = label.max(dim=2)[0].max(dim=2)[1] # batch,1 # y=raws
-    xs = label.max(dim=3)[0].max(dim=2)[1]
-
-    return torch.hstack((xs,ys))
 
 def read_sdd(filename=''):
     """
