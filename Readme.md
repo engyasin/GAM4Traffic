@@ -3,7 +3,11 @@
 # Generalized Additive Model for traffic prediction
 
 
+<center><img src="./gam_arch.png" alt="image" width="300" height="auto"></center>
+
 This repo contain 3 Jupyter Notebooks for trajectory prediction of pedestrains, based on velocity & direction. The results outperform many deep learning model, sometimes without any roadmap information.
+
+
 
 # Setup
 
