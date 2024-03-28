@@ -8,7 +8,6 @@
 This repo contain 3 Jupyter Notebooks for trajectory prediction of pedestrains, based on velocity & direction. The results outperform many deep learning model, sometimes without any roadmap information.
 
 
-
 # Setup
 
 The datasets files should be downloaded and extracted in the same directory as the notebooks. Namely, they are:
@@ -34,5 +33,4 @@ If you used this work in your porject, consider citing the following paper:
 
 
 
-Additionally, if you like this project, you can star it
 

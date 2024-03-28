@@ -1,3 +1,4 @@
 *.npy
 gam_all*
 __pycache__/
+indds/
