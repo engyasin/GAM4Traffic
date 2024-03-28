@@ -29,7 +29,15 @@ Lastly, the notebook can be run directly cell-by-cell to check the results.
 
 If you used this work in your porject, consider citing the following paper:
 
-*Coming soon*
+```bib
+@article{yousif2024efficient,
+  title={Efficient and Interpretable Traffic Destination Prediction using Explainable Boosting Machines},
+  author={Yousif, Yasin and M{\"u}ller, J{\"o}rg},
+  journal={arXiv preprint arXiv:2402.03457},
+  year={2024}
+}
+```
+
 
 
 
